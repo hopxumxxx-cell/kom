@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Web Giới Thiệu Cá Nhân</title>
+ <style>
+        /* Định nghĩa biến màu (Color Variables) */
+        :root {
+            --color-primary: #1E5C8B;   /* Xanh Dương Đậm - Chủ đạo */
+            --color-accent-1: #00C49F;  /* Xanh Ngọc - Điểm nhấn chính */
+            --color-accent-2: #4CAF50;  /* Xanh Lá - Điểm nhấn phụ/Hover */
+            --color-background: #E8F8F5; /* Nền nhẹ nhàng */
+            --color-text: #333333;
+        }
+
+        /* Thiết lập cơ bản */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* Định dạng Header - Trang chủ */
+        #trang-chu {
+            background-color: var(--color-primary);
+            color: aqua ;
+            padding: 60px 20px;
+            text-align: center;
+            background-image: linear-gradient(135deg, var(--color-primary), #307ABF);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container ảnh (Để xử lý sự kiện click và CSS hiệu ứng) */
+        .avatar-container {
+            display: inline-block;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .avatar {
+            width: 180px;
+            height: 180px;
+            /* Đảm bảo border-radius: 50% để tạo hình tròn */
+            border-radius: 50%; 
+            object-fit: cover;
+            border: 6px solid var(--color-accent-1); 
+            margin-bottom: 15px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.2s ease-out;
+        }
+        .avatar-container:hover .avatar {
+            transform: scale(1.05) rotate(3deg); 
+            box-shadow: 0 0 0 8px rgba(0, 196, 159, 0.5); 
+        }
+        .avatar-container:active .avatar {
+            transform: scale(0.98);
+            border-color: var(--color-accent-2);
+        }
+
+        #trang-chu h1 {
+            margin: 10px 0 5px;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #trang-chu p {
+            font-size: 1.2em;
+            font-style: italic;
+            color: aqua ;
+        }
+
+        /* Định dạng các Section */
+        .section {
+            padding: 40px 20px;
+            margin: 30px auto;
+            max-width: 1100px;
+            background: white  ;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); 
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .section:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .section h2 {
+            text-align: center;
+            color: var(--color-primary);
+            margin-bottom: 30px;
+            border-bottom: 3px solid var( --color-accent-1); 
+            padding-bottom: 10px;
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+
+        /* Định dạng mục Giới thiệu (Flexbox) */
+        #gioi-thieu {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        #gioi-thieu .content-box {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: #f7fcfc;
+            transition: all 0.3s;
+        }
+        #gioi-thieu .content-box:hover {
+            border-color: var(--color-accent-2);
+            transform: translateY(-5px);
+        }
+        #gioi-thieu h3 {
+            color: var(--color-accent-2); 
+            border-left: 4px solid var(--color-accent-2);
+            padding-left: 10px;
+        }
+        
+        /* Định dạng mục Sản phẩm/Hoạt động (Grid) */
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+
+        .activity-item {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .activity-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .activity-item h3 {
+            color: var(--color-accent-1); 
+            font-size: 1.4em;
+            margin-top: 0;
+        }
+        
+        .activity-item img, .activity-item iframe {
+            width: 100%;
+            height: 200px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            object-fit: cover;
+            border: 1px solid var(--color-background);
+        }
+        
+        .activity-item .text-content {
+            text-align: left;
+            padding: 15px;
+            border-left: 3px solid var(--color-primary);
+            margin-top: 10px;
+            font-style: italic;
+            background-color: #f0f8ff; 
+            border-radius: 5px;
+        }
+        
+        .activity-item a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .activity-item a:hover {
+            color: var(--color-accent-2); 
+            text-decoration: underline;
+        }
+
+        /* Định dạng Footer - Liên hệ */
+        footer {
+            background-color: var(--color-primary);
+            color: white ;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        footer a {
+            color: var(--color-accent-1); 
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--color-accent-2); 
+            text-decoration: underline;
+        }
+
+        .social-links {
+            margin: 15px 0;
+            font-size: 1.1em;
+        }
+
+        /* Tinh chỉnh Responsive */
+        @media (max-width: 992px) {
+            #gioi-thieu {
+                flex-direction: column; 
+            }
+            .activity-grid {
+                grid-template-columns: 1fr 1fr; 
+            }
+        }
+        @media (max-width: 600px) {
+            .activity-grid {
+                grid-template-columns: 1fr; 
+            }
+        }
+    </style>
+    <audio id="clickSound">
+    <source src="C:\Users\Admin\Downloads\Cos cộng Cos bằng 2 Cos Cos - Tony Bùi.mp3" type="audio/mpeg"> 
+    </audio>
+</head>
+<body>
+<header id="trang-chu">
+       <div class="avatar-container" onclick="playSound()">
+            <img src="https://scontent.fsgn16-1.fna.fbcdn.net/v/t39.30808-6/598577602_122117362137047576_484034827914293603_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeH1NX0zUg6Y9qUJNR-4tEOzNh-5Tg5EUi82H7lODkRSL3JrIE1o8OLU3lqZK6pD5gxGKCI4Nhz46Tbz4MDdwle-&_nc_ohc=UoxdsmGjFbMQ7kNvwEmTddS&_nc_oc=AdkcjflXWnBtNnd0F-5Xl2oaTe_i4QfmPA90z-Z9t94yH14I2G9p4eY1wAfCwAQpuQhi8heboLeEaEkj7UfyzP3V&_nc_zt=23&_nc_ht=scontent.fsgn16-1.fna&_nc_gid=2PcVUGQ3YLsXEPFSoO66rg&oh=00_AflTFRe6DBf8vzoxn7Gl6MXM8J1BoPQukEdfQPjKeKci3w&oe=6941BD25" alt="Ảnh đại diện" class="avatar">
+        </div>
+    <section id="gioi-thieu" class="section">
+                       <h1>Nguyễn Xum Hợp </h1> 
+            <p>Kiền trì nỗ lực ắt sẽ thành công </p> 
+        </div>
+    </header>
+    <section id="gioi-thieu" class="section">
+        <h2>Về Bản Thân</h2>
+        <div class="content-box">
+            <h3>Học vấn</h3>
+            <p><strong>Trường:</strong> THCS-THPT Minh Hòa </p>
+            <p><strong>Lớp:</strong> 12a1 </p>
+            <p><strong>Khối:</strong>Tự nhiên  </p>
+            <p><strong>Niên Khóa:</strong> 2025 - 2026 </p>
+        </div>
+        <div class="content-box">
+            <h3>Sở thích</h3>
+            <ul>
+                <li>Cầu lông </li>
+                <li>Coi video giải thích các hiện tượng khoa học </li>
+                <li>Chơi game Đối kháng </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="san-pham" class="section">
+        <h2>Sản Phẩm & Hoạt Động</h2>
+        <div class="activity-grid">
+            
+            <div class="activity-item">
+                <h3>1. Video về Giải tích </h3>
+                <p>Loại: Video về toán học </p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/62qG339U-pc?si=heXAWqFU9eB80_aQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <p>Video giải thích cho ta biết về ứng dụng của giải tích trong kỹ thuật thực tế </p>
+            </div>
+
+            <div class="activity-item">
+                <h3>2. Bài thơ tự sáng tác</h3>
+                <p>Loại: Bài viết về kiên trì </p>
+                <div class="text-content">
+                    <p>"Biển học vô biên lấy kiên chì làm bến
+Mây xanh không lối lấy chí cả dựng lên
+Thế giới quá rộng lớn, còn chúng ta thì quá nhỏ bé 
+Trở thành người như thế nào thì ta không thể quyết định được,
+Điều duy  nhất ta có thể làm chính là kiên trì..."</p>
+                </div>
+                <a href="#" target="_blank">Đọc toàn bộ bài viết</a>
+            </div>
+
+            <div class="activity-item">
+                <h3>3. Hình ảnh vui nhộn</h3>
+                <p>Loại: Hình ảnh</p>
+                <img src="https://scontent.fsgn16-1.fna.fbcdn.net/v/t39.30808-6/598566152_122117362263047576_4160925493347476246_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFruFCSQ1efY3Jqc5aQTtCeQeMPRprpoSlB4w9GmumhKRwry2GB0--EPx8jCr9JosEbuY3YXlsQatc_ryRYKVmf&_nc_ohc=VK4DPAQ_gu8Q7kNvwFRCExg&_nc_oc=AdnQxquCohjJePw3lOVBa8fCe5j_X6eDG7ADVQV3aEGRkco0DoaAOKvVwwuXgj5xPYXEGZGJ1RR2sJxSWbhETBVl&_nc_zt=23&_nc_ht=scontent.fsgn16-1.fna&_nc_gid=1nkDplS_BMu-AjJ0aSfCNQ&oh=00_AfkyOP6-dkBxH-CHEB3DF8DPBos7vM3rWE03W-fpMHIBGQ&oe=6941C27E" alt="Hình ảnh vui nhộn">
+                <p>Đây là hình ảnh hồi mình còn đang học lớp 6 và lần đầu được gắp người nước ngoài </p>
+            </div>
+            
+        </div>
+    </section>
+
+    <footer id="lien-he">
+        <p>Liên hệ:</p>
+        <a href="mailto:[email_của_bạn@example.com]">Email: hopxumxxx@gmail.com </a>
+        <div class="social-links">
+            <p>Mạng xã hội:</p>
+            <a href="https://www.facebook.com/nguyen.xum.hop" target="_blank">Facebook</a> | 
+            <a href="https://www.tiktok.com/@user5jubbiqdts?is_from_webapp=1&sender_device=pc" target="_blank">Tiktok</a>
+        </div>
+        <p>&copy; 2025 Nguyễn Xum Hợp. All rights reserved.</p>
+    </footer>
+  <script>
+      // Tìm phần tử audio dựa trên ID
+        const audio = document.getElementById('clickSound');
+
+        // Định nghĩa hàm phát âm thanh
+        function playSound() {
+            // Đặt lại thời gian về 0 để có thể click liên tục và nghe lại từ đầu
+            audio.currentTime = 0; 
+            audio.play();
+        }
+    </script>
+</body>
+</html>
